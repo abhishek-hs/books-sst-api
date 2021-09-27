@@ -16,13 +16,13 @@ export const main = handler(async (event) => {
     description,
     currency: "usd",
     shipping: {
-      name: "shamaji hs",
+      name: "Jenny Rosen",
       address: {
-        line1: "2029 hs sbp",
-        postal_code: "395010",
-        city: "surat",
-        state: "GJ",
-        country: "IND",
+        line1: "510 Townsend St",
+        postal_code: "98140",
+        city: "San Francisco",
+        state: "CA",
+        country: "US",
       },
     }
   });
