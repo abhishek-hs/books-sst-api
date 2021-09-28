@@ -3,23 +3,23 @@ import dynamoDb from "./util/dynamodb";
 
 export const main = handler(async (event) => {
   const params = {
-    TableName: process.env.TABLE_NAME,
+    TableName: process.env.tableName,
     // 'Key' defines the partition key and sort key of the item to be retrieved
-    // Key: {
-    //   userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-    //   bookId: event.pathParameters.id, // The id of the note from the path
-    // },
-
+    // - 'userId': Identity Pool identity id of the authenticated user
+    // - 'bookId': path parameter
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      // noteId: event.pathParameters.id
+      bookId: event.pathParameters.id
     }
   };
 
   const result = await dynamoDb.get(params);
-  if (!result.Item) {
+  if ( ! result.Item) {
     throw new Error("Item not found.");
   }
+
+  // Set a timeout
+  await new Promise(resolve => setTimeout(resolve, 10000));
 
   // Return the retrieved item
   return result.Item;
