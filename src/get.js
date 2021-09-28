@@ -5,10 +5,15 @@ export const main = handler(async (event) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     // 'Key' defines the partition key and sort key of the item to be retrieved
+    // Key: {
+    //   userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
+    //   bookId: event.pathParameters.id, // The id of the note from the path
+    // },
+
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
-      bookId: event.pathParameters.id, // The id of the note from the path
-    },
+      userId: event.requestContext.identity.cognitoIdentityId,
+      // noteId: event.pathParameters.id
+    }
   };
 
   const result = await dynamoDb.get(params);
