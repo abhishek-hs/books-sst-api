@@ -31,20 +31,20 @@ export default function Home() {
   }, [isAuthenticated]);
   
   function loadNotes() {
-    return API.get("notes", "/notes");
+    return API.get("books", "/books");
   }
 
   function renderNotesList(notes) {
     return (
       <>
-        <LinkContainer to="/notes/new">
+        <LinkContainer to="/books/new">
           <ListGroup.Item action className="py-3 text-nowrap text-truncate">
             <BsPencilSquare size={17} />
             <span className="ml-2 font-weight-bold">Create a new note</span>
           </ListGroup.Item>
         </LinkContainer>
         {notes.map(({ bookId, content, createdAt }) => (
-          <LinkContainer key={bookId} to={`/notes/${bookId}`}>
+          <LinkContainer key={bookId} to={`/books/${bookId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
                 {content.trim().split("\n")[0]}
@@ -72,7 +72,7 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
-        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Books</h2>
         <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>
     );

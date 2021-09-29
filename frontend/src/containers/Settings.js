@@ -14,7 +14,7 @@ export default function Settings() {
   const stripePromise = loadStripe(config.STRIPE_KEY);
 
   function billUser(details) {
-    return API.post("notes", "/billing", {
+    return API.post("books", "/billing", {
       body: details
     });
   }
